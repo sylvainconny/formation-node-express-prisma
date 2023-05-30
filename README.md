@@ -14,12 +14,12 @@
    - [Routage avec Express.js](wiki/express.md#4-routage-avec-expressjs)
    - [Middlewares dans Express.js](wiki/express.md#5-middlewares-dans-expressjs)
 
-3. Gestion des données avec Prisma
+3. [Gestion des données avec Prisma](wiki/prisma.md)
 
-   - Qu'est-ce que Prisma et pourquoi l'utiliser ?
-   - Installation de Prisma et configuration d'une base de données
-   - Création de modèles de données avec Prisma
-   - Requêtes CRUD avec Prisma
+   - [Qu'est-ce que Prisma et pourquoi l'utiliser ?](wiki/prisma.md#1-quest-ce-que-prisma-et-pourquoi-lutiliser)
+   - [Installation de Prisma et configuration d'une base de données](wiki/prisma.md#2-installation-de-prisma-et-configuration-dune-base-de-données)
+   - [Création de modèles de données avec Prisma](wiki/prisma.md#3-création-de-modèles-de-données-avec-prisma)
+   - [Requêtes CRUD avec Prisma](wiki/prisma.md#4-requêtes-crud-avec-prisma)
 
 4. Développement d'une application web simple
 
