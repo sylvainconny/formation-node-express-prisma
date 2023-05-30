@@ -128,3 +128,67 @@ Dans cet exemple, nous utilisons le middleware `body-parser` pour analyser le co
 Ensuite, nous définissons une route POST `/users`. Lorsque cette route est atteinte, la fonction de rappel est exécutée. Nous supposons que le corps de la requête est au format JSON avec les champs `name` et `email`, que nous extrayons à l'aide de `req.body`.
 
 Vous pouvez adapter ce code en fonction de la structure de votre corps de requête JSON et des opérations que vous souhaitez effectuer avec les données. Assurez-vous d'importer et d'utiliser correctement le middleware `body-parser` pour analyser le corps de la requête au format JSON.
+
+## 5. Middlewares dans Express.js
+
+Les middlewares jouent un rôle central dans Express.js en permettant d'effectuer des opérations de traitement supplémentaires entre la réception d'une requête et la réponse envoyée au client. Les middlewares agissent comme des fonctions intermédiaires qui peuvent modifier la requête, effectuer des validations, ajouter des fonctionnalités et bien plus encore. Voici quelques points importants à retenir :
+
+- Un middleware est une fonction qui reçoit trois arguments : `req` (pour la requête), `res` (pour la réponse) et `next` (pour passer au middleware suivant).
+- Vous pouvez utiliser la méthode `app.use()` pour appliquer un middleware à toutes les routes, ou `app.use(path, middleware)` pour l'appliquer à des routes spécifiques.
+- L'ordre des middlewares est important car ils sont exécutés dans l'ordre où ils sont définis. Il est recommandé de définir les middlewares avant les routes pour qu'ils soient exécutés avant le traitement des routes.
+- Les middlewares peuvent être utilisés pour effectuer diverses tâches, telles que l'analyse du corps de la requête, la gestion des erreurs, l'authentification, l'autorisation, la journalisation, la compression, etc.
+- Vous pouvez créer vos propres middlewares en définissant une fonction qui effectue une tâche spécifique, puis l'utiliser avec `app.use()` ou `app.METHOD()` pour l'appliquer à des routes spécifiques.
+- Les middlewares peuvent également être chaînés en utilisant `next()` pour passer au middleware suivant dans la pile.
+- Si un middleware ne renvoie pas de réponse ou ne passe pas au middleware suivant avec `next()`, la requête sera bloquée et la réponse ne sera jamais envoyée au client.
+
+L'utilisation de middlewares dans Express.js offre une grande flexibilité pour ajouter des fonctionnalités supplémentaires, gérer des tâches communes et personnaliser le flux de traitement des requêtes. Ils permettent une séparation claire des préoccupations et une meilleure organisation du code.
+
+**Exemple 1: Journalisation des requêtes**
+
+```js
+const requestLogger = (req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+  next();
+};
+
+// Ajout du middleware requestLogger
+app.use(requestLogger);
+```
+
+**Exemple 2: Authentification avec JWT (JSON Web Tokens)**
+
+```javascript
+// Importer le module jsonwebtoken pour gérer les jetons JWT
+const jwt = require("jsonwebtoken");
+
+// Middleware d'authentification
+const authenticate = (req, res, next) => {
+  try {
+    // Récupérer le jeton JWT du header Authorization
+    const token = req.headers.authorization.split(" ")[1];
+    // Vérifier et décoder le jeton JWT
+    const decodedToken = jwt.verify(token, "secret_key");
+    // Ajouter les informations utilisateur au corps de la requête
+    req.userData = { userId: decodedToken.userId };
+    next();
+  } catch (error) {
+    res.status(401).json({ message: "Authentification échouée" });
+  }
+};
+
+// Utiliser le middleware d'authentification sur une route spécifique
+app.get("/protected-route", authenticate, (req, res) => {
+  // Utiliser les informations utilisateur pour des opérations protégées
+  res.send("Route protégée");
+});
+```
+
+Dans cet exemple, nous utilisons un middleware d'authentification pour protéger une route spécifique (`/protected-route`). Le middleware `authenticate` est une fonction qui reçoit la requête (`req`), la réponse (`res`), et la fonction `next` pour passer au middleware suivant.
+
+Dans le middleware `authenticate`, nous récupérons le jeton JWT du header `Authorization` de la requête. Nous vérifions ensuite la validité et décodons le jeton à l'aide de la clé secrète (`secret_key` dans cet exemple). Si la vérification est réussie, nous ajoutons les informations utilisateur (dans cet exemple, `userId`) au corps de la requête avec `req.userData`. Ensuite, nous appelons `next()` pour passer au middleware suivant dans la pile.
+
+Si la vérification échoue ou si le jeton n'est pas fourni, nous renvoyons une réponse d'erreur avec un code 401 (non autorisé).
+
+En utilisant ce middleware d'authentification avec `app.get('/protected-route', authenticate, ...)`, nous pouvons protéger la route `/protected-route` pour n'autoriser que les requêtes avec un jeton JWT valide. Les informations utilisateur peuvent ensuite être utilisées pour effectuer des opérations protégées dans la fonction de rappel associée à cette route.
+
+Assurez-vous d'adapter cet exemple en fonction de votre méthode d'authentification, de la structure du jeton JWT et des opérations spécifiques que vous souhaitez effectuer lors de l'authentification.

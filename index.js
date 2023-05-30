@@ -8,6 +8,8 @@ const options = [
   { name: 'E4. Route avec paramètre dynamique', value: 'express/4/ex2' },
   { name: 'E4. Routes imbriquées', value: 'express/4/ex3' },
   { name: 'E4. Route POST', value: 'express/4/ex4' },
+  { name: 'E5. Journalisation des requêtes', value: 'express/5/ex1' },
+  { name: 'E5. Authentification avec JWT', value: 'express/5/ex2' },
 ];
 
 // Configuration du sélecteur
