@@ -24,7 +24,7 @@ const questions = [
 inquirer.prompt(questions).then((answers) => {
 
   // Exécute la commande "node --version"
-  const childProcess = exec(`node ${answers.option}`);
+  const childProcess = exec(`node src/${answers.option}`);
 
   // Redirige le stdout vers le terminal
   childProcess.stdout.pipe(process.stdout);

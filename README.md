@@ -12,6 +12,7 @@
    - [Installation d'Express.js](wiki/express.md#2-installation-dexpressjs)
    - [Configuration d'une application Express.js de base](wiki/express.md#3-configuration-dune-application-expressjs-de-base)
    - [Routage avec Express.js](wiki/express.md#4-routage-avec-expressjs)
+   -
 
 3. Gestion des données avec Prisma
 
@@ -29,3 +30,7 @@
 
 5. Ressources supplémentaires
    - Suggestions de tutoriels, documentation et communauté pour approfondir les connaissances
+
+---
+
+Merci ChatGPT et GitHub Copilot
