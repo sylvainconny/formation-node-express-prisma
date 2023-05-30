@@ -47,3 +47,84 @@ Pour exécuter ce code, vous devez avoir Express.js installé dans votre projet 
 Cet exemple constitue une base simple pour une application Express.js, et vous pouvez ajouter davantage de routes, de middleware et de fonctionnalités en fonction des besoins de votre application.
 
 ## 4. Routage avec Express.js
+
+- Le routage est un aspect essentiel de la création d'applications web avec Express.js.
+- Express.js facilite la définition et la gestion des routes à l'aide de méthodes de routage.
+- Les méthodes de routage couramment utilisées dans Express.js sont `get`, `post`, `put`, `delete`, etc.
+- Chaque méthode de routage est associée à une URL spécifique (ou un chemin) et une fonction de rappel qui sera exécutée lorsque cette route est atteinte.
+- Par exemple, `app.get('/users', callback)` définit une route GET pour l'URL `/users` et exécute le callback lorsque cette route est atteinte.
+- Les routes peuvent également inclure des paramètres dynamiques définis en utilisant des variables dans l'URL, tels que `/users/:id`, où `:id` est un paramètre dynamique qui peut être extrait de la requête.
+- Express.js prend en charge les modèles de routes plus complexes en utilisant des expressions régulières ou des chaînes de caractères avec des paramètres optionnels.
+- Vous pouvez également définir des routes imbriquées en utilisant `app.use()` pour organiser et gérer des routes spécifiques à un groupe ou à une partie de l'application.
+- L'ordre des routes est important, car Express.js évalue les routes de manière séquentielle et utilise la première route correspondante qu'il rencontre.
+- Il est courant d'utiliser des middleware pour effectuer des opérations de traitement supplémentaires avant d'atteindre la route finale.
+
+En résumé, le routage avec Express.js consiste à définir des routes qui correspondent à des URL spécifiques et à associer des fonctions de rappel à ces routes. Express.js offre une variété de méthodes de routage pour gérer les différentes actions HTTP. Vous pouvez également utiliser des paramètres dynamiques, des modèles de routes complexes et des routes imbriquées pour créer des applications web plus avancées. Le routage avec Express.js permet de définir la logique de votre application et de gérer les requêtes des clients de manière organisée et structurée.
+
+**Exemple 1: Route simple**
+
+```javascript
+app.get("/", (req, res) => {
+  res.send("Accueil");
+});
+
+app.get("/about", (req, res) => {
+  res.send("À propos de nous");
+});
+```
+
+Dans cet exemple, nous définissons deux routes GET. La première route correspond à l'URL `'/'` et renvoie la réponse "Accueil". La deuxième route correspond à l'URL `'/about'` et renvoie la réponse "À propos de nous".
+
+**Exemple 2: Route avec paramètre dynamique**
+
+```javascript
+app.get("/users/:id", (req, res) => {
+  const userId = req.params.id;
+  res.send(`Utilisateur avec l'ID ${userId}`);
+});
+```
+
+Dans cet exemple, nous définissons une route GET avec un paramètre dynamique `:id`. Lorsque cette route est atteinte, nous extrayons la valeur de l'ID à partir de `req.params.id` et renvoyons une réponse avec l'ID correspondant.
+
+**Exemple 3: Routes imbriquées**
+
+```javascript
+const adminRouter = express.Router();
+
+adminRouter.get("/", (req, res) => {
+  res.send("Page d'administration");
+});
+
+adminRouter.get("/users", (req, res) => {
+  res.send("Liste des utilisateurs");
+});
+
+app.use("/admin", adminRouter);
+```
+
+Dans cet exemple, nous définissons des routes imbriquées en créant un routeur (`express.Router()`) pour les routes d'administration. Le routeur `adminRouter` définit deux routes GET, une pour l'URL `'/admin'` et une pour l'URL `'/admin/users'`. Nous utilisons ensuite `app.use('/admin', adminRouter)` pour indiquer à Express d'utiliser ce routeur pour toutes les routes qui commencent par `'/admin'`.
+
+Ces exemples illustrent différents cas de routage avec Express.js, allant des routes simples aux routes avec des paramètres dynamiques et des routes imbriquées. Vous pouvez les utiliser comme point de départ et les adapter en fonction des besoins de votre application.
+
+**Exemple 4: Route POST**
+
+```javascript
+// Importer le middleware body-parser pour analyser le corps de la requête au format JSON
+const bodyParser = require("body-parser");
+
+// Utiliser le middleware body-parser pour analyser le corps de la requête au format JSON
+app.use(bodyParser.json());
+
+// Définir la route POST '/users'
+app.post("/users", (req, res) => {
+  const { name, email } = req.body; // Supposons que le corps de la requête est au format JSON avec les champs 'name' et 'email'
+  // Effectuer des opérations pour créer un nouvel utilisateur avec les données fournies
+  res.send("Utilisateur créé avec succès");
+});
+```
+
+Dans cet exemple, nous utilisons le middleware `body-parser` pour analyser le corps de la requête au format JSON. Nous l'importons et l'utilisons en tant que middleware dans notre application Express avec `app.use(bodyParser.json())`.
+
+Ensuite, nous définissons une route POST `/users`. Lorsque cette route est atteinte, la fonction de rappel est exécutée. Nous supposons que le corps de la requête est au format JSON avec les champs `name` et `email`, que nous extrayons à l'aide de `req.body`.
+
+Vous pouvez adapter ce code en fonction de la structure de votre corps de requête JSON et des opérations que vous souhaitez effectuer avec les données. Assurez-vous d'importer et d'utiliser correctement le middleware `body-parser` pour analyser le corps de la requête au format JSON.
