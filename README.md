@@ -21,15 +21,7 @@
    - [Création de modèles de données avec Prisma](wiki/prisma.md#3-création-de-modèles-de-données-avec-prisma)
    - [Requêtes CRUD avec Prisma](wiki/prisma.md#4-requêtes-crud-avec-prisma)
 
-4. Développement d'une application web simple
-
-   - Création d'un serveur Express.js
-   - Utilisation de Prisma pour interagir avec la base de données
-   - Création de routes pour l'API
-   - Exemple de requêtes CRUD avec Prisma
-
-5. Ressources supplémentaires
-   - Suggestions de tutoriels, documentation et communauté pour approfondir les connaissances
+4. [Développement d'une application web simple](wiki/application.md)
 
 ---
 

@@ -12,6 +12,7 @@ const options = [
   { name: 'E5. Authentification avec JWT', value: 'express/5/ex2' },
   { name: `P4. Création d'un utilisateur`, value: 'prisma/4/ex1' },
   { name: `P4. Liste des utilisateurs`, value: 'prisma/4/ex2' },
+  { name: `Application`, value: 'application' },
 ];
 
 // Configuration du sélecteur
