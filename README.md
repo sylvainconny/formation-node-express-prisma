@@ -9,6 +9,13 @@ cd formation-node-express-prisma
 npm install
 ```
 
+## Démarrer
+Dans le terminal:
+```bash
+npm start
+```
+Puis choisir avec le clavier l'exécution correspondant à la partie du cours
+
 ## Cours
 
 1. [Introduction à Node.js](wiki/nodejs.md)
