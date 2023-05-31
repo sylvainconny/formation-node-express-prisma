@@ -1,5 +1,14 @@
 # Node + Express + Prisma
 
+## Installation
+
+Dans le terminal de votre dossier de travail:
+```bash
+git clone https://github.com/sylvainconny/formation-node-express-prisma
+cd formation-node-express-prisma
+npm install
+```
+
 1. [Introduction à Node.js](wiki/nodejs.md)
 
    - [Qu'est-ce que Node.js ?](wiki/nodejs.md#1-quest-ce-que-nodejs)
